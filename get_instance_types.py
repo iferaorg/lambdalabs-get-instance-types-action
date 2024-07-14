@@ -13,7 +13,7 @@ def main():
     url = "https://cloud.lambdalabs.com/api/v1/instance-types"
     headers = {"Authorization": f"Bearer {lambda_token}"}
 
-    response = requests.get(url, headers=headers)
+    response = requests.get(url, headers=headers, timeout=10)
     if response.status_code != 200:
         error = response.json().get("error", {"message": "An unknown error occurred"})
         print(
