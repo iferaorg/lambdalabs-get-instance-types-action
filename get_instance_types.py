@@ -1,12 +1,12 @@
 """Module to fetch and display Lambda Labs cloud instance types."""
 
 import os
-import requests
 import sys
+import requests
 
 
 def main():
-    """Fetch and display available Lambda Labs cloud instance types based on environment variables."""
+    """Fetch and display Lambda Labs cloud instance types from environment settings."""
     available_only = os.getenv("AVAILABLE_ONLY", "true").lower() == "true"
     names_only = os.getenv("NAMES_ONLY", "false").lower() == "true"
     lambda_token = os.getenv("LAMBDA_TOKEN")
