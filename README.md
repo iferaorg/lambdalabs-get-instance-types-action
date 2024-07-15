@@ -16,13 +16,13 @@ This GitHub Action retrieves the instance types offered by Lambda GPU Cloud and 
 
 **Required**: No  
 **Default**: `false`  
-**Description**: Return only the names of the instance types.
+**Description**: Return only the names of the instance types. If false, return the full json payload from the LambdaLabs API.
 
 ## Outputs
 
 ### `instance_types`
 
-**Description**: The filtered list of instance types or instance type names.
+**Description**: The filtered list of instance types or instance type names. For the output schema documentation see https://cloud.lambdalabs.com/api/v1/docs#operation/instanceTypes.
 
 ## Example Usage
 
