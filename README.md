@@ -22,7 +22,7 @@ This GitHub Action retrieves the instance types offered by Lambda GPU Cloud and 
 
 ### `instance_types`
 
-**Description**: The filtered list of instance types or instance type names. For the output schema documentation see https://cloud.lambdalabs.com/api/v1/docs#operation/instanceTypes.
+**Description**: The filtered list of instance types or instance type names. For the output schema documentation see <https://cloud.lambdalabs.com/api/v1/docs#operation/instanceTypes>.
 
 ## Example Usage
 
