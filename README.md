@@ -1,3 +1,5 @@
+[![MegaLinter](https://github.com/iferaorg/lambdalabs-get-instance-types-action/workflows/MegaLinter/badge.svg?branch=main)](https://github.com/iferaorg/lambdalabs-get-instance-types-action/actions?query=workflow%3AMegaLinter+branch%3Amain)
+
 # Get LambdaLabs Instance Types Action
 
 This GitHub Action retrieves the instance types offered by Lambda GPU Cloud and optionally filters based on availability.
