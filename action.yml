@@ -1,26 +1,26 @@
 ---
-name: 'Get LambdaLabs Instance Types'
-description: 'Retrieves the instance types offered by Lambda GPU Cloud and optionally filters based on availability.'
+name: "Get LambdaLabs Instance Types"
+description: "Retrieves the instance types offered by Lambda GPU Cloud and optionally filters based on availability."
 inputs:
   available_only:
-    description: 'Filter out instance types with no available regions'
+    description: "Filter out instance types with no available regions"
     required: false
-    default: 'true'
+    default: "true"
   names_only:
-    description: 'Return only the names of the instance types'
+    description: "Return only the names of the instance types"
     required: false
-    default: 'false'
+    default: "false"
 outputs:
   instance_types:
-    description: 'The filtered list of instance types or instance type names'
+    description: "The filtered list of instance types or instance type names"
     value: ${{ steps.get-instance-types.outputs.instance_types }}
 runs:
-  using: 'composite'
+  using: "composite"
   steps:
     - name: Set up Python
       uses: actions/setup-python@v5
       with:
-        python-version: '3.x'
+        python-version: "3.x"
 
     - name: Install requests library
       run: pip install requests
