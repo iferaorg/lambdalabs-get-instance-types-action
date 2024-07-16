@@ -46,8 +46,11 @@ def main():
     output_file_path = os.getenv('GITHUB_OUTPUT')
 
     # Write the output to the GITHUB_OUTPUT environment file
-    with open(output_file_path, 'a', encoding='utf-8') as file:
-        file.write(f"instance_types={output_str}\n")
+    if output_file_path is not None:
+        with open(output_file_path, 'a', encoding='utf-8') as file:
+            file.write(f"instance_types={output_str}\n")
+    else:
+        raise ValueError("GITHUB_OUTPUT environment variable is not set.")
 
 
 if __name__ == "__main__":
