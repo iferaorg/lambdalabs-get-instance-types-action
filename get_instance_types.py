@@ -2,6 +2,7 @@
 
 import os
 import sys
+import json
 
 import requests
 
@@ -40,7 +41,7 @@ def main():
         instance_type_names = list(instance_types.keys())
         output_str = ",".join(instance_type_names)
     else:
-        output_str = str(instance_types)
+        output_str = json.JSONEncoder().encode(instance_types)
 
     # Get the path to the GITHUB_OUTPUT environment file
     output_file_path = os.getenv("GITHUB_OUTPUT")
