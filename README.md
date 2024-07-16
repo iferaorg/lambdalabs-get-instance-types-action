@@ -48,15 +48,14 @@ jobs:
     runs-on: ubuntu-latest
     steps:
     - name: Checkout
-      uses: actions/checkout@v2
+      uses: actions/checkout@v4
 
     - name: Get Instance Types
-      uses: ./
+      uses: iferaorg/lambdalabs-get-instance-types-action@v1
       with:
         available_only: ${{ inputs.available_only }}
         names_only: ${{ inputs.names_only }}
-      env:
-        LAMBDA_TOKEN: ${{ secrets.LAMBDA_TOKEN }}
+        lamba_token: ${{ secrets.LAMBDA_TOKEN }}
     
     - name: Print Instance Types
-      run: echo ${{ steps.get-instance-types.outputs.instance_types }}
+      run: echo '${{ steps.get-instance-types.outputs.instance_types }}'
