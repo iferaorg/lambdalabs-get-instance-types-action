@@ -20,9 +20,6 @@ outputs:
 runs:
   using: "composite"
   steps:
-    - name: Checkout
-      uses: actions/checkout@v4
-
     - name: Set up Python
       uses: actions/setup-python@v5
       with:
@@ -34,7 +31,7 @@ runs:
 
     - id: get-instance-types
       name: Get Instance Types
-      run: python get_instance_types.py
+      run: python ${{ github.action_path }}/get_instance_types.py
       shell: bash
       env:
         AVAILABLE_ONLY: ${{ inputs.available_only }}
