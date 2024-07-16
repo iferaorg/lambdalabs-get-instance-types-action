@@ -1,8 +1,8 @@
 """Module to fetch and display Lambda Labs cloud instance types."""
 
+import json
 import os
 import sys
-import json
 
 import requests
 
