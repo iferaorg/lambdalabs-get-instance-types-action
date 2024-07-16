@@ -10,6 +10,9 @@ inputs:
     description: "Return only the names of the instance types"
     required: false
     default: "false"
+  lambda_token:
+    description: "The LambdaLabs API token"
+    required: true
 outputs:
   instance_types:
     description: "The filtered list of instance types or instance type names"
@@ -33,4 +36,4 @@ runs:
       env:
         AVAILABLE_ONLY: ${{ inputs.available_only }}
         NAMES_ONLY: ${{ inputs.names_only }}
-        LAMBDA_TOKEN: ${{ secrets.LAMBDA_TOKEN }}
+        LAMBDA_TOKEN: ${{ inputs.lambda_token }}
