@@ -38,9 +38,16 @@ def main():
 
     if names_only:
         instance_type_names = list(instance_types.keys())
-        print(f'::set-output name=instance_types::{",".join(instance_type_names)}')
+        output_str = ",".join(instance_type_names)
     else:
-        print(f"::set-output name=instance_types::{instance_types}")
+        output_str = str(instance_types)
+
+    # Get the path to the GITHUB_OUTPUT environment file
+    output_file_path = os.getenv('GITHUB_OUTPUT')
+
+    # Write the output to the GITHUB_OUTPUT environment file
+    with open(output_file_path, 'a', encoding='utf-8') as file:
+        file.write(f"instance_types={output_str}\n")
 
 
 if __name__ == "__main__":
