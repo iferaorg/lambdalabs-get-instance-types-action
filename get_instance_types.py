@@ -20,10 +20,12 @@ def main():
     headers = {"Authorization": f"Bearer {lambda_token}"}
 
     response = requests.get(url, headers=headers, timeout=10)
+
     if response.status_code != 200:
         error = response.json().get("error", {"message": "An unknown error occurred"})
         print(
-            f'Error: {error["message"]}. '
+            f'Error code: {response.status_code}, {error.get("code", "global/unknown")}'
+            f'Message: {error["message"]}'
             f'Suggestion: {error.get("suggestion", "No suggestion available")}'
         )
         sys.exit(1)
