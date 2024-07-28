@@ -20,15 +20,22 @@ outputs:
 runs:
   using: "composite"
   steps:
-    - run: echo ${{ github.action }}
+    - id: tmp-dir
+      run: |
+        tmp_dir="tmp-$(echo ${{ github.action_repository }} | tr '/' '-')"
+        echo "tmp_dir=$tmp_dir" >> $GITHUB_OUTPUT
+      shell: bash
+
+    - name: Copy requirements
+      run: cp ${{ github.action_path }}/requirements.txt ${{ steps.tmp-dir.outputs.tmp_dir }}
       shell: bash
 
     - name: Set up Python
       uses: actions/setup-python@v5
       with:
         python-version: "3.12"
-        # cache: "pip"
-        # cache-dependency-path: "${{ github.action_path }}/requirements.txt"
+        cache: "pip"
+        cache-dependency-path: ${{ steps.tmp-dir.outputs.tmp_dir }}
 
     - name: Install dependencies
       run: pip install -r ${{ github.action_path }}/requirements.txt
@@ -42,3 +49,7 @@ runs:
         AVAILABLE_ONLY: ${{ inputs.available_only }}
         NAMES_ONLY: ${{ inputs.names_only }}
         LAMBDA_TOKEN: ${{ inputs.lambda_token }}
+
+    - name: Clean up
+      run: rm -rf ${{ steps.tmp-dir.outputs.tmp_dir }}
+      shell: bash
