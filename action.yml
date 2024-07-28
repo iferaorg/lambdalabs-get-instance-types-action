@@ -25,6 +25,7 @@ runs:
         tmp_dir="tmp-$(echo ${{ github.action_repository }} | tr '/' '-')"
         echo "tmp_dir=$tmp_dir" >> $GITHUB_OUTPUT
         cat $GITHUB_OUTPUT
+        echo ${{ github.action_repository }}
       shell: bash
 
     - name: Copy requirements
