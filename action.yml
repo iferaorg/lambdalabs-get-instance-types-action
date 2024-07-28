@@ -22,11 +22,11 @@ runs:
   steps:
     - id: tmp-dir
       run: |
-        tmp_dir="tmp-$(echo ${{ github.action_repository }} | tr '/' '-')"
+        tmp_dir="tmp-$(echo $GITHUB_ACTION_REPOSITORY | tr '/' '-')"
         echo "tmp_dir=$tmp_dir" >> $GITHUB_OUTPUT
-        cat $GITHUB_OUTPUT
-        echo ${{ github.action_repository }}
       shell: bash
+      env:
+        GITHUB_ACTION_REPOSITORY: ${{ github.action_repository }}
 
     - name: Copy requirements
       run: cp ${{ github.action_path }}/requirements.txt ${{ steps.tmp-dir.outputs.tmp_dir }}
