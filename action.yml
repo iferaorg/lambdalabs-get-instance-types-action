@@ -21,7 +21,10 @@ runs:
   using: "composite"
   steps:
     - id: tmp-dir
-      run: echo 'tmp_dir=.tmp'$GITHUB_ACTION_REPOSITORY | tr '/' '-' >> $GITHUB_OUTPUT
+      run: |
+        echo 'tmp_dir=.tmp'$GITHUB_ACTION_REPOSITORY | tr '/' '-' >> $GITHUB_OUTPUT
+        echo $GITHUB_ACTION_REPOSITORY
+        cat $GITHUB_OUTPUT
       shell: bash
       env:
         GITHUB_ACTION_REPOSITORY: ${{ github.action_repository }}
