@@ -20,32 +20,25 @@ outputs:
 runs:
   using: "composite"
   steps:
-    - id: tmp-dir
-      run: |
-        echo 'tmp_dir=.tmp'$GITHUB_ACTION_REPOSITORY | tr '/' '-' >> $GITHUB_OUTPUT
-        echo $GITHUB_ACTION_REPOSITORY
-        cat $GITHUB_OUTPUT
-      shell: bash
-      env:
-        GITHUB_ACTION_REPOSITORY: ${{ github.action_repository }}
-
     - name: Copy requirements
-      run: cp ${{ github.action_path }}/requirements.txt ${{ steps.tmp-dir.outputs.tmp_dir }}
+      run: cp ${{ github.action_path }}/requirements.txt .tmp-ifera-lambdalabs-get-instance-types-action-requirements.txt
       shell: bash
 
     - name: Set up Python
+      id: setup-python
       uses: actions/setup-python@v5
       with:
         python-version: "3.12"
         cache: "pip"
-        cache-dependency-path: ${{ steps.tmp-dir.outputs.tmp_dir }}
+        cache-dependency-path: .tmp-ifera-lambdalabs-get-instance-types-action-requirements.txt
 
     - name: Install dependencies
+      if: steps.setup-python.outputs.cache-hit != 'true'
       run: pip install -r ${{ github.action_path }}/requirements.txt
       shell: bash
 
-    - id: get-instance-types
-      name: Get Instance Types
+    - name: Get Instance Types
+      id: get-instance-types
       run: python ${{ github.action_path }}/get_instance_types.py
       shell: bash
       env:
@@ -54,5 +47,5 @@ runs:
         LAMBDA_TOKEN: ${{ inputs.lambda_token }}
 
     - name: Clean up
-      run: rm -rf ${{ steps.tmp-dir.outputs.tmp_dir }}
+      run: rm -f .tmp-ifera-lambdalabs-get-instance-types-action-requirements.txt
       shell: bash
