@@ -20,15 +20,21 @@ outputs:
 runs:
   using: "composite"
   steps:
-    - name: Checkout
-      uses: actions/checkout@v4
-
     - name: Set up Python
       uses: actions/setup-python@v5
       with:
         python-version: "3.12"
-        cache: "pip"
-        cache-dependency-path: ${{ github.action_path }}/requirements.txt
+        # cache: "pip"
+        # cache-dependency-path: ${{ github.action_path }}/requirements.txt
+
+    - run: pwd
+      shell: bash
+
+    - run: ls -la
+      shell: bash
+
+    - run: ls -la ${{ github.action_path }}
+      shell: bash
 
     - name: Install dependencies
       run: pip install -r ${{ github.action_path }}/requirements.txt
