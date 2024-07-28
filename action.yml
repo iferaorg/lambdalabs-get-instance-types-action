@@ -33,7 +33,6 @@ runs:
         cache-dependency-path: .tmp-ifera-lambdalabs-get-instance-types-action-requirements.txt
 
     - name: Install dependencies
-      if: steps.setup-python.outputs.cache-hit != 'true'
       run: pip install -r ${{ github.action_path }}/requirements.txt
       shell: bash
 
