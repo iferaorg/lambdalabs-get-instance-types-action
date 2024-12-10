@@ -20,17 +20,9 @@ outputs:
 runs:
   using: "composite"
   steps:
-    - name: Copy requirements
-      run: cp ${{ github.action_path }}/requirements.txt .tmp-ifera-lambdalabs-get-instance-types-action-requirements.txt
-      shell: bash
-
-    - run: pwd
-      shell: bash
-
-    - run: echo ${{ github.action_path }}
-      shell: bash
-
-    - run: echo ${{ github.workspace }}
+    - name: Find requirements
+      id: find-requirements
+      run: echo "relative_path=$(realpath --relative-to='${{ github.workspace }}' '${{ github.action_path }}/requirements.txt')" >> "$GITHUB_OUTPUT"
       shell: bash
 
     - name: Set up Python
@@ -39,7 +31,7 @@ runs:
       with:
         python-version: "3.12"
         cache: "pip"
-        cache-dependency-path: .tmp-ifera-lambdalabs-get-instance-types-action-requirements.txt
+        cache-dependency-path: ${{ steps.find-requirements.outputs.relative_path }}
 
     - name: Install dependencies
       run: pip install -r ${{ github.action_path }}/requirements.txt
