@@ -24,6 +24,15 @@ runs:
       run: cp ${{ github.action_path }}/requirements.txt .tmp-ifera-lambdalabs-get-instance-types-action-requirements.txt
       shell: bash
 
+    - run: pwd
+      shell: bash
+
+    - run: echo ${{ github.action_path }}
+      shell: bash
+
+    - run: echo ${{ github.workspace }}
+      shell: bash
+
     - name: Set up Python
       id: setup-python
       uses: actions/setup-python@v5
